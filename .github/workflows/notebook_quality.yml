@@ -1,0 +1,35 @@
+name: Notebook Code Quality (Linter)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Permite disparar manualmente
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Linting Tools
+        run: |
+          pip install flake8 nbconvert
+
+      - name: Check Notebook Syntax and Style
+        run: |
+          # Converte notebooks para scripts temporários para o linter conseguir ler
+          jupyter nbconvert --to script notebooks/*.ipynb
+          
+          # Roda o flake8 para verificar erros de sintaxe e estilo básico
+          # --select=E9,F63,F7,F82 seleciona erros fatais de sintaxe/lógica
+          flake8 notebooks/ --count --select=E9,F63,F7,F82 --show-source --statistics
+          
+          echo "Sucesso! Todos os notebooks passaram na verificação de sintaxe."
