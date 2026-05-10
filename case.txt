@@ -1,0 +1,180 @@
+Case Técnico | Engenheiro de Dados
+Documento de apoio ao processo seletivo
+Como parte do nosso processo seletivo para a posição de Engenheiro de Dados, preparamos
+este case técnico para entender melhor sua forma de estruturar soluções de dados, organizar
+pipelines, modelar dados e disponibilizar informações para consumo analítico.
+Mais do que avaliar ferramenta, queremos conhecer seu raciocínio técnico, sua capacidade de
+organização, sua visão de arquitetura e a forma como você documenta e comunica decisões.
+1. Contexto do case
+Você atuará como Engenheiro de Dados em uma empresa de serviços com operação nacional.
+Atualmente, os dados do negócio estão distribuídos em diferentes fontes brutas, com padrões,
+formatos e estruturas variados. A área de dados ainda não possui uma base consolidada e
+confiável para consumo analítico.
+Seu papel será estruturar uma solução de engenharia de dados que transforme essas fontes
+brutas em uma base analítica organizada, confiável e pronta para consumo.
+1.1. Quem vai consumir sua solução
+O consumidor direto das tabelas que você construir será um Analista de BI/Dados. Esse
+profissional utilizará as tabelas finais da sua solução para construir dashboards e análises
+voltados à liderança das áreas de Operações, Comercial e Atendimento.
+Isso significa que suas tabelas finais precisam:
+Ser claras, bem estruturadas e autoexplicativas
+Permitir análises segmentadas (por região, canal, categoria, produto, período)
+Facilitar o cálculo de indicadores como receita, volume de pedidos, ticket médio, taxas de
+cancelamento e atraso, entre outros
+Viabilizar análises de evolução temporal e comparações entre dimensões do negócio
+1.2. Perguntas que o negócio precisa responderPara guiar sua modelagem, considere que o time de negócio precisa de visibilidade sobre
+questões como:
+Como o negócio performou no período analisado?
+Quais regiões, canais e categorias apresentam melhor e pior desempenho?
+Onde estão os principais gargalos operacionais?
+Existem sinais de perda de receita ou ineficiência?
+Quais ações práticas poderiam ser priorizadas pela liderança?
+Importante: Suas tabelas finais devem permitir que essas perguntas sejam respondidas de
+forma direta, sem que o analista precise refazer tratamentos ou consolidações.
+2. Objetivo do case
+Com base nos dados fornecidos, esperamos que você seja capaz de:
+Explorar e entender a estrutura das fontes brutas, seus formatos e conteúdos
+Identificar relacionamentos e dependências entre os dados
+Investigar a qualidade das informações e definir estratégias de tratamento
+Desenvolver transformações utilizando PySpark e Delta Tables
+Estruturar a solução no Databricks
+Propor e construir um modelo analítico final orientado ao consumo por BI
+Documentar premissas, decisões técnicas e limitações encontradas
+Organizar os artefatos de forma clara e rastreável
+3. Base de dados
+Os arquivos fonte estão disponíveis na pasta sources/ .
+O conjunto contém dados transacionais e cadastrais relacionados ao negócio, incluindo
+informações sobre clientes, pedidos, produtos, canais, regiões, entregas e ocorrências
+operacionais.
+As fontes possuem formatos e estruturas variados. Parte do desafio está justamente em
+compreender cada arquivo, avaliar sua qualidade e decidir a melhor estratégia de ingestão e
+tratamento.
+Dica: Dedique tempo para explorar cada fonte antes de iniciar as transformações. Entender
+os dados em profundidade — seus formatos, conteúdos, relacionamentos e limitações — é
+parte fundamental do desafio.
+4. Ambiente esperadoPara desenvolvimento do case, pedimos que você utilize:
+Databricks Community Edition para processamento e organização da solução
+GitHub para publicação dos códigos desenvolvidos
+A ideia é que consigamos avaliar tanto a solução final quanto a forma como você organiza e
+apresenta seu trabalho técnico.
+Caso alguma limitação da versão Community do Databricks influencie sua abordagem, isso
+pode ser sinalizado na documentação. O importante é que a solução esteja clara,
+organizada e tecnicamente bem justificada.
+5. Desafio proposto
+A partir das fontes disponibilizadas, construa uma solução que transforme os dados brutos em
+uma base analítica confiável e pronta para consumo por um Analista de BI.
+Sua entrega deve demonstrar capacidade de:
+Organizar a ingestão das fontes, considerando seus diferentes formatos e estruturas
+Investigar e tratar problemas de qualidade encontrados nos dados
+Consolidar entidades relacionadas vindas de diferentes fontes
+Definir a granularidade adequada das tabelas finais
+Estruturar um modelo analítico que separe claramente as entidades principais do
+negócio (clientes, produtos, regiões, canais...) dos eventos e transações (pedidos,
+entregas, ocorrências...), facilitando análises cruzadas e segmentadas
+Disponibilizar tabelas prontas para consumo, com nomes de colunas claros e
+relacionamentos bem definidos
+Registrar validações, premissas e limitações
+6. Entregáveis esperados
+6.1. Solução no Databricks
+A solução deve ser construída no Databricks Community Edition, utilizando notebooks e/ou
+scripts que representem o fluxo completo de transformação.
+A entrega deve demonstrar, de forma clara, as etapas do processamento — da ingestão das
+fontes brutas até as tabelas finais.
+Fique à vontade para propor uma organização em camadas, caso entenda que isso melhora a
+clareza e rastreabilidade da solução.6.2. Transformações com Python e PySpark
+Esperamos ver uso prático de Python/PySpark para leitura, tratamento e modelagem dos
+dados.
+Você pode combinar abordagens (PySpark e Spark SQL etc.) conforme entender mais
+adequado para cada etapa.
+6.3. Modelagem analítica final
+A partir das fontes brutas, esperamos que você proponha e construa uma estrutura final
+adequada para consumo analítico.
+O modelo deve permitir que o Analista de BI consiga, de forma simples:
+Calcular indicadores como receita líquida, quantidade de pedidos, ticket médio, taxas de
+cancelamento e atraso
+Segmentar análises por região, canal, categoria de produto e período
+Cruzar informações de diferentes entidades (ex: pedidos × clientes × produtos)
+Acompanhar a evolução temporal dos principais indicadores
+Esperamos clareza sobre:
+A granularidade de cada tabela final (ex: um registro por pedido? por item? por cliente?)
+Quais são as entidades principais e como elas se relacionam
+Como eventos/transações se conectam às entidades de contexto (quem comprou, o que
+comprou, onde, quando, por qual canal)
+Premissas adotadas na modelagem
+6.4. Qualidade de dados
+Sua entrega deve demonstrar cuidado com a qualidade e consistência das informações.
+Esperamos que você investigue as fontes, identifique possíveis problemas e documente como
+os tratou ou sinalizou. Isso inclui — mas não se limita a — inconsistências de formato, registros
+inválidos, conflitos entre fontes, campos ausentes e quaisquer outros problemas que você
+encontrar durante a exploração.
+As decisões sobre o que tratar, descartar ou sinalizar devem estar documentadas e
+justificadas.
+6.5. Publicação no GitHubOs artefatos do projeto devem ser publicados em um repositório público no GitHub. A
+organização do repositório também fará parte da avaliação.
+Esperamos encontrar:
+Notebooks ou scripts utilizados
+Instruções de execução
+Explicação da estrutura da solução
+Documentação técnica
+6.6. Documentação técnica
+Entregar uma documentação simples, objetiva e bem organizada, contendo:
+Visão geral da solução e suas etapas
+Regras e premissas adotadas
+Principais problemas encontrados nos dados e como foram tratados
+Decisões de modelagem e justificativas
+Validações aplicadas
+Limitações da solução
+Sugestões de evolução
+6.7. Resumo executivo técnico
+Além da documentação detalhada, pedimos um resumo executivo técnico em 1 a 2 páginas ou
+5 a 6 slides, contendo:
+O que foi construído
+Principais decisões técnicas
+Principais desafios encontrados
+Visão geral do modelo final
+Próximos passos recomendados para evolução da solução
+7. O que vamos avaliar
+Capacidade de estruturar uma solução de engenharia de dados
+Domínio de Python/PySpark e familiaridade com Databricks
+Qualidade e clareza das transformações
+Capacidade de modelagem analítica orientada ao consumo por BI
+Investigação e tratamento de problemas de qualidade nos dados
+Alinhamento entre o modelo final e as necessidades do negócioOrganização dos artefatos e do repositório
+Clareza e objetividade da documentação
+Capacidade de justificar decisões técnicas
+Importante: não estamos buscando apenas uma solução funcional. Queremos entender como
+você pensa, investiga os dados, organiza o problema e toma decisões técnicas ao longo da
+construção.
+8. Orientações gerais
+Você pode fazer premissas, desde que estejam claramente documentadas.
+Caso encontre problemas nos dados, registre e explique como tratou ou considerou esses
+pontos.
+Fique à vontade para propor a arquitetura e organização que entender mais adequada.
+Priorizamos consistência, organização, rastreabilidade e clareza — mais do que
+complexidade desnecessária.
+Não é obrigatório construir uma solução extremamente sofisticada, mas esperamos uma
+estrutura sólida e coerente com o desafio proposto.
+Lembre-se: suas tabelas finais serão consumidas por outro profissional. Pense na
+usabilidade e clareza do que você entrega.
+9. Formato de entrega
+Link do repositório no GitHub contendo:
+Notebooks utilizados
+Documentação técnica
+Resumo executivo técnico
+Caso deseje, você também pode incluir:
+Diagrama da solução
+Desenho de camadas ou arquitetura
+Explicação de possíveis evoluções
+Observações sobre performance, governança ou reprocessamento
+10. Prazo
+Prazo para entrega: até 4 dias corridos a partir do recebimento deste material.
+11. Apresentação do caseApós a entrega, poderemos agendar uma conversa para que você apresente sua solução,
+explique sua linha de raciocínio e detalhe as principais decisões adotadas ao longo do
+desenvolvimento.
+Essa etapa faz parte da avaliação e será importante para entendermos sua abordagem
+técnica, sua capacidade de defesa da solução e sua clareza de comunicação.
+Agradecemos sua participação no processo e desejamos um ótimo desenvolvimento do case.
+Busque organizar sua entrega da forma que considerar mais adequada para representar sua
+forma de trabalho. Estamos interessados não apenas no resultado final, mas também na
+lógica, nas decisões técnicas e na forma como você estrutura a solução.
+Boa sorte!
